@@ -1,0 +1,101 @@
+*, body {
+    margin: 0;
+}
+
+.container {
+    width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* header */
+.header {
+    background-color: rgba(0, 54, 81, 0.98);
+    color: #FFF;
+    padding: 25px;
+    overflow: hidden;
+}
+.header a {
+    float: left;
+    color: #FFF;
+    text-decoration: none;
+}
+.header .cart {
+    float: right;
+    font-size:20px
+}
+/* Products */
+.products {
+    margin-top: 15px;
+    overflow: hidden;
+}
+.products h1, .products h2 {
+    margin-bottom: 15px;
+}
+.products .sidebar {
+    float: left;
+    width: 30%;
+}
+.products .sidebar .container {
+    margin-left: 50px
+}
+.sidebar ul {
+    list-style: none
+}
+.sidebar ul li {
+    display: block
+}
+.sidebar a {
+    color: #647eff;
+    text-decoration: none;
+    padding: 15px;
+    width: 200px;
+    display: table;
+    margin-top: 10px;
+}
+.sidebar .selected {
+    background-color: #003651;
+    display: table;
+    color: #FFF
+}
+.products .main {
+    float: left;
+    width: 70%;
+}
+.products .my-item {
+    display: flex;
+}
+.products .items {
+    overflow: hidden;
+    width: 25%;
+}
+table {
+    border-collapse: inherit !important;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+thead {
+    background-color: #1b6d85;
+    padding: 15px;
+    color: #FFF
+}
+thead th {padding:5px}
+.total td {
+    background-color: #1b6d85;
+    padding: 5px !important;
+    color: #FFF
+}
+.show-details td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.cart-links {
+    text-align: right;
+    margin-right: 50px;
+    margin-top: 10px;
+}
+.cart-links a:first-child {
+    margin-right: 15px
+}

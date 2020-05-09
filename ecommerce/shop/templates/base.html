@@ -1,0 +1,40 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %} Home {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'shop/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'shop/css/bootstrap.css' %}" />
+    <link rel="stylesheet" href="{% static 'shop/css/font-awesome.min.css' %}" />
+    <script src="{% static 'shop/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'shop/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'shop/js/custom.js' %}"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <a href="{% url 'shop:product_list' %}">
+                <h1 id="ts">My Shop</h1>
+            </a>
+            <div class="cart">
+                {% with total_items=cart|length %}
+                    {% if total_items > 0 %}
+                        <a href="{% url 'cart:cart_detail' %}">
+                            Your Cart: {{ total_items }} item{{ total_items|pluralize }},
+                            ${{ cart.get_total_price }}
+                        </a>
+                    {% else %}
+                        <a href="{% url "cart:cart_detail" %}"><h3>Your cart is empty</h3></a>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+{% block content %}
+    content
+{% endblock %}
+</body>
+</html>

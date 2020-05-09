@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %}
+    {% if category %}
+    {{ category.name }}
+    {% else %}
+    Products
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="products">
+    <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="container">
+                <ul>
+                    <h2>Categories</h2>
+                    <li
+                        {% if not category %}
+                            class="selected"
+                        {% endif %}
+                    >
+                        <a href="{% url 'shop:product_list' %}">All</a>
+                    </li>
+                </ul>
+
+                {% for cat in categories %}
+                    <ul>
+                        <li
+                            {% if category.slug == cat.slug %}
+                                class="selected"
+                            {% endif %}
+                        >
+                            <!-- absolute_url => product_list_cartegory -->
+                            <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                        </li>
+                    </ul>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- Main -->
+        <div class="main">
+            <div class="container">
+                <h1>
+                    {% if category %}
+                        {{ category.name }}
+                    {% else %}
+                    Products
+                    {% endif %}
+                </h1>
+                <div class="my-item">
+                {% for prod in products %}
+                    <div class="items">
+                        <a href="{{ prod.get_absolute_url }}">
+                            <img src="
+                            {% if prod.image %}
+                                {{ prod.image.url }}
+                            {% else %}
+                                {% static 'shop/img/default.png' %}
+                            {% endif %}
+                            " width=250px>
+                        </a><br>
+                        <p class="center">
+                            <a href="{{ prod.get_absolute_url }}">{{ prod.name }}</a>
+                            <br>Price: ${{ prod.price }}
+                        </p>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

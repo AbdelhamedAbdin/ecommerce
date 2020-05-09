@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    your shopping cart
+{% endblock %}
+{% block content %}
+    <table>
+        <thead class="t-head">
+            <h1>your shoping cart</h1>
+            <tr>
+                <th>Image</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Remove</th>
+                <th>Unit Price</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if cart %}
+                {% for item in cart %}
+                    {% with product=item.product %}
+                    <tr class="show-details">
+                        <td>
+                            <a href="{{ product.get_absolute }}">
+                                <img src="
+                                {% if product.image %}
+                                    {{ product.image.url }}
+                                {% else %}
+                                    {% static "shop/img/default.png" %}
+                                {% endif %}
+                                " width="100px">
+                            </a>
+                        </td>
+                        <td>{{ product.name }}</td>
+                        <td>
+                            <form method="post" action="{% url "cart:cart_add" product.id %}">
+                                {% csrf_token %}
+                                {{ item.update_quantity_form.quantity }}
+                                {{ item.update_quantity_form.update }}
+                                <input type="submit" value="Update">
+                            </form>
+                        </td>
+                        <td>
+                            <a href="{% url "cart:cart_remove" product.id %}">Remove</a>
+                        </td>
+                        <td>{{ product.price }}</td>
+                        <td>{{ item.total_price }}</td>
+                    </tr>
+                    {% endwith %}
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4" style="width: 100%;text-align: center;">There's no product</td>
+                </tr>
+            {% endif %}
+            <tr class="total">
+                <td>Total</td>
+                <td colspan="4"></td>
+                <td class="num">${{ cart.get_total_price }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="text-right cart-links">
+        <a href="{% url 'shop:product_list' %}">Continue Shoping</a>
+        <a href="{% url 'orders:order_create' %}" class="btn btn-primary">Checkout</a>
+    </p>
+{% endblock %}
